@@ -1,6 +1,7 @@
 package firstProject;
 
 import java.io.File;
+import java.io.FileWriter;
 import java.util.Scanner;
 
 public class LockedMeCom {
@@ -8,7 +9,7 @@ public class LockedMeCom {
 	public static final String errorMessage="\tContact admin of LockedMe.com at admin@lockedme.com ";
 	public static void main(String[] args) {
 		
-		searchFile();
+		createFile();
 
 	}
 	public static void showMenu() {
@@ -44,7 +45,38 @@ public class LockedMeCom {
 	}
 	}	
 	public static void createFile() {
+		Scanner obj = new Scanner(System.in);
+		try {
+		System.out.println("\tEnter file name :");
 		
+		String fileName=obj.nextLine();
+		File file=new File(projectFilesPath+"\\"+ fileName);
+		if(file.exists()) {
+			
+			System.out.println("\tSame name File already exist in directory. Choose other name or delete first that file.");
+		}
+		else {
+			
+		
+		System.out.println("\tEnter how many lines you want to write in file");
+		int linesCount=Integer.parseInt(obj.nextLine());
+		FileWriter myWriter=new FileWriter(projectFilesPath+"\\"+ fileName);
+		for(int i = 1;i<=linesCount;i++) {
+			System.out.println("\tEnter Line "+i+" in file");
+			myWriter.write(obj.nextLine()+"\n");
+		}
+		System.out.println("\tFile successfully Added to the directory.");
+		
+		myWriter.close();
+		}
+		}
+		catch(Exception Ex){
+		System.out.println(errorMessage);	
+		}
+		finally {
+			obj.close();
+		
+		}
 	}
 	public static void deleteFile() {
 		System.out.println("\tEnter the name of file to be deleted");
