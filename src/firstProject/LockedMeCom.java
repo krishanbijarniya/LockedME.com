@@ -1,10 +1,15 @@
 package firstProject;
 
-public class LockedMeCom {
+import java.io.File;
+import java.util.Scanner;
 
+public class LockedMeCom {
+	public static final String projectFilesPath = "D:\\lockedmefiles";
+	public static final String errorMessage="\tContact admin of LockedMe.com at admin@lockedme.com ";
 	public static void main(String[] args) {
 		showMenu();
-		
+		getFiles();
+		deleteFile();
 
 	}
 	public static void showMenu() {
@@ -18,15 +23,51 @@ public class LockedMeCom {
 		System.out.println("\t 3. Delete a File");
 		System.out.println("\t 4. Search a File");
 		System.out.println("\t 5. Exit");
+		System.out.println("**********************************************************");
+		
 	}
 	
 	public static void getFiles() {
-		
+		try {
+		File folder=new File(projectFilesPath);
+		File[] fileList = folder.listFiles();
+		if(fileList.length==0)
+			System.out.println("\tNo files exist in File directory ");
+		else{
+			for(var f:fileList) {
+			System.out.println(f.getName());
+			}
+		}
 	}
+	
+	catch(Exception Ex) {
+		System.out.println(errorMessage);
+	}
+	}	
 	public static void createFile() {
 		
 	}
 	public static void deleteFile() {
+		System.out.println("\tEnter the name of file to be deleted");
+		Scanner obj=new Scanner(System.in);
+		String fileName=obj.nextLine();
+		try {
+		File file=new File(projectFilesPath+"\\"+ fileName);
+		if(file.exists()) {
+			file.delete();
+			System.out.println("\tFile successfully deleted");
+		}
+		else
+			System.out.println("\tFile do not exist in directory ");
+		}
+		catch(Exception Ex)	{
+			System.out.println(errorMessage);
+		}
+		finally {
+			obj.close();
+		}
+		
+		
 		
 	}
 	public static void searchFile() {
