@@ -7,9 +7,8 @@ public class LockedMeCom {
 	public static final String projectFilesPath = "D:\\lockedmefiles";
 	public static final String errorMessage="\tContact admin of LockedMe.com at admin@lockedme.com ";
 	public static void main(String[] args) {
-		showMenu();
-		getFiles();
-		deleteFile();
+		
+		searchFile();
 
 	}
 	public static void showMenu() {
@@ -71,6 +70,23 @@ public class LockedMeCom {
 		
 	}
 	public static void searchFile() {
-		
+		System.out.println("\tEnter the name of file you want to search");
+		Scanner obj=new Scanner(System.in);
+		String fileName=obj.nextLine();
+		try {
+		File file=new File(projectFilesPath+"\\"+ fileName);
+		if(file.exists()) {
+			
+			System.out.println("\tFile found");
+		}
+		else
+			System.out.println("\tFile do not exist in directory ");
+		}
+		catch(Exception Ex)	{
+			System.out.println(errorMessage);
+		}
+		finally {
+			obj.close();
+		}
 	}
 }
