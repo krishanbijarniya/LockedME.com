@@ -8,10 +8,53 @@ public class LockedMeCom {
 	public static final String projectFilesPath = "D:\\lockedmefiles";
 	public static final String errorMessage="\tContact admin of LockedMe.com at admin@lockedme.com ";
 	public static void main(String[] args) {
+		Scanner ob=new Scanner(System.in);
 		
-		createFile();
-
-	}
+		int choice;
+		try {
+		
+		do {
+			showMenu();
+			
+			
+			System.out.println("\t Enter your choice");
+			
+		
+			choice=Integer.parseInt(ob.nextLine());
+			
+			switch (choice)
+			{
+			case 1:
+				getFiles();
+				break;
+			case 2:
+				createFile();
+				break;
+			case 3:
+				deleteFile();
+				break;
+			case 4:
+				searchFile();
+				break;
+			case 5:
+				System.exit(0);
+				break;
+			default:
+				System.out.println("\tInvalid Option. Choose Correct One.");
+				break;
+			}
+			}while(true);
+			}
+			catch(Exception mismatch) 
+			{
+					System.out.println("Enter only numbers for choice of opertion");
+			}
+		
+		
+			
+		
+		
+		}
 	public static void showMenu() {
 		System.out.println("**********************************************************");
 		System.out.println("\t\t Welcomes You LockedMe.Com");
@@ -46,6 +89,7 @@ public class LockedMeCom {
 	}	
 	public static void createFile() {
 		Scanner obj = new Scanner(System.in);
+		int linesCount;
 		try {
 		System.out.println("\tEnter file name :");
 		
@@ -59,30 +103,37 @@ public class LockedMeCom {
 			
 		
 		System.out.println("\tEnter how many lines you want to write in file");
-		int linesCount=Integer.parseInt(obj.nextLine());
+		
+		
+		linesCount=Integer.parseInt(obj.nextLine());
+		
+		
 		FileWriter myWriter=new FileWriter(projectFilesPath+"\\"+ fileName);
-		for(int i = 1;i<=linesCount;i++) {
+		for(int i = 1;i<=linesCount;i++) 
+		{
 			System.out.println("\tEnter Line "+i+" in file");
 			myWriter.write(obj.nextLine()+"\n");
 		}
 		System.out.println("\tFile successfully Added to the directory.");
 		
-		myWriter.close();
 		}
 		}
-		catch(Exception Ex){
-		System.out.println(errorMessage);	
+		catch(Exception mismatch)
+		{
+			System.out.println("enter only numbers");
 		}
-		finally {
-			obj.close();
 		
-		}
+
+	
+	
 	}
+		
 	public static void deleteFile() {
 		System.out.println("\tEnter the name of file to be deleted");
 		Scanner obj=new Scanner(System.in);
-		String fileName=obj.nextLine();
+		
 		try {
+			String fileName=obj.nextLine();
 		File file=new File(projectFilesPath+"\\"+ fileName);
 		if(file.exists()) {
 			file.delete();
@@ -91,12 +142,15 @@ public class LockedMeCom {
 		else
 			System.out.println("\tFile do not exist in directory ");
 		}
-		catch(Exception Ex)	{
-			System.out.println(errorMessage);
+		catch(Exception Ex) {
+			System.out.println("\t"+errorMessage);
 		}
-		finally {
-			obj.close();
-		}
+		
+			
+		
+		
+			
+		
 		
 		
 		
@@ -104,8 +158,9 @@ public class LockedMeCom {
 	public static void searchFile() {
 		System.out.println("\tEnter the name of file you want to search");
 		Scanner obj=new Scanner(System.in);
-		String fileName=obj.nextLine();
+		
 		try {
+			String fileName=obj.nextLine();
 		File file=new File(projectFilesPath+"\\"+ fileName);
 		if(file.exists()) {
 			
@@ -117,8 +172,6 @@ public class LockedMeCom {
 		catch(Exception Ex)	{
 			System.out.println(errorMessage);
 		}
-		finally {
-			obj.close();
-		}
+		
 	}
 }
